@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:my_home/Funcoes/consumo.dart';
 import 'package:my_home/Funcoes/luzes.dart';
 
 class Menu_Consumo extends StatefulWidget {
@@ -35,12 +36,14 @@ class _Menu_ConsumoState extends State<Menu_Consumo> {
             ),
             child: ElevatedButton(
                 onPressed: () {
-                  //Futura funcao
-
-                  _exibir();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Consumo_Screen()));
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.grey, //Theme.of(context).primaryColor,
+                  primary: Theme.of(context)
+                      .primaryColor, //Theme.of(context).primaryColor,
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                   ),

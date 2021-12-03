@@ -1,6 +1,9 @@
-import 'dart:html';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth_web/firebase_auth_web.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:my_home/Menu/Menu_Agenda.dart';
 import 'package:my_home/Menu/Menu_Consumo.dart';
@@ -8,8 +11,12 @@ import 'package:my_home/Menu/Menu_Luzes.dart';
 import 'package:my_home/Menu/Menu_Pessoas.dart';
 import 'package:my_home/Menu/Menu_Trancas.dart';
 import 'package:my_home/Menu/Menu_Notas.dart';
+import 'package:my_home/login.dart';
+import 'package:my_home/globals.dart' as globals;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
       title: 'MyHome',
       home: Login_Screen(),
@@ -37,6 +44,7 @@ class Home_Menu extends StatefulWidget {
 class _Home_MenuState extends State<Home_Menu> {
   @override
   Widget build(BuildContext context) {
+    print(globals.UserUid);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -89,79 +97,6 @@ class _Home_MenuState extends State<Home_Menu> {
   }
 }
 
-class Login_Screen extends StatelessWidget {
-  const Login_Screen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: Container(
-        decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
-        child: Center(
-          child: Column(
-            children: [
-              Center(
-                  child: Icon(Icons.home,
-                      color: Theme.of(context).secondaryHeaderColor,
-                      size: 150)),
-              Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                  child: TextField(
-                    style: TextStyle(
-                        color: Theme.of(context).secondaryHeaderColor),
-                    decoration: new InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).secondaryHeaderColor)),
-                      border: OutlineInputBorder(),
-                      hintText: 'Login',
-                      hintStyle: TextStyle(
-                          color: Theme.of(context).secondaryHeaderColor),
-                    ),
-                  )),
-              Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                  child: TextField(
-                    style: TextStyle(
-                        color: Theme.of(context).secondaryHeaderColor),
-                    decoration: new InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).secondaryHeaderColor)),
-                        border: OutlineInputBorder(),
-                        hintText: 'Senha',
-                        hintStyle: TextStyle(
-                            color: Theme.of(context).secondaryHeaderColor)),
-                  )),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                child: Container(
-                    width: 200,
-                    height: 80,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          onSurface: Theme.of(context).primaryColor),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    Home_Menu()));
-                      },
-                      child: Text('Login'),
-                    )),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class About_Screen extends StatelessWidget {
   const About_Screen({Key? key}) : super(key: key);
 
@@ -207,7 +142,7 @@ class About_Screen extends StatelessWidget {
                     'imagens/foto_tavares.png',
                   )),
               Text(
-                'O Aplicativo pode ativar e desativar luzes e trancaas, Registrar os moradores da casa e lembralos de anotaçoes e compromissos usando um sistema de som e notificação',
+                'O Aplicativo pode ativar e desativar luzes e trancas, Registrar os moradores da casa e lembra-los de anotaçoes e compromissos usando um sistema de som e notificação',
                 style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
               ),
             ],

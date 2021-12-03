@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:my_home/Funcoes/notas.dart';
 
 class Menu_Notas extends StatefulWidget {
   const Menu_Notas({Key? key}) : super(key: key);
@@ -10,15 +11,8 @@ class Menu_Notas extends StatefulWidget {
 
 class _Menu_NotasState extends State<Menu_Notas> {
   void _exibir() async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Em breve'),
-          content: Text('Este recurso sera desenvolvido em breve'),
-        );
-      },
-    );
+    Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) => Notas_Screen()));
   }
 
   @override
@@ -37,7 +31,8 @@ class _Menu_NotasState extends State<Menu_Notas> {
                   _exibir();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.grey, //Theme.of(context).primaryColor,
+                  primary: Theme.of(context)
+                      .primaryColor, //Theme.of(context).primaryColor,
                   shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0),
                   ),

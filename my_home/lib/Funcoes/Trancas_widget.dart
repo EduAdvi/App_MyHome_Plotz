@@ -3,6 +3,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:my_home/Funcoes/luzes.dart';
+import 'package:my_home/globals.dart' as globals;
 
 class Tranca_botao extends StatefulWidget {
   final String nome_Tranca;
@@ -31,6 +32,7 @@ class _Tranca_botaoState extends State<Tranca_botao> {
             child: ElevatedButton(
                 onPressed: () {
                   setState(() {
+                    globals.consumo_tranca += 1;
                     estado = !estado;
                   });
                 },

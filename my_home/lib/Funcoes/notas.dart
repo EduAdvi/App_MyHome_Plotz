@@ -3,7 +3,6 @@ import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:my_home/Funcoes/add_pessoas.dart';
 import 'package:my_home/Funcoes/notas_add.dart';
 import 'package:my_home/Funcoes/pessoas.dart';
 import 'package:my_home/Funcoes/pessoas_widget.dart';
@@ -12,14 +11,14 @@ import 'package:my_home/Funcoes/luzes_widget.dart';
 
 import 'package:my_home/globals.dart' as globals;
 
-class Pessoas_Screen extends StatefulWidget {
-  const Pessoas_Screen({Key? key}) : super(key: key);
+class Notas_Screen extends StatefulWidget {
+  const Notas_Screen({Key? key}) : super(key: key);
 
   @override
-  _Pessoas_ScreenState createState() => _Pessoas_ScreenState();
+  _Notas_ScreenState createState() => _Notas_ScreenState();
 }
 
-class _Pessoas_ScreenState extends State<Pessoas_Screen> {
+class _Notas_ScreenState extends State<Notas_Screen> {
   late CollectionReference notas;
 
   @override
@@ -29,17 +28,16 @@ class _Pessoas_ScreenState extends State<Pessoas_Screen> {
     notas = FirebaseFirestore.instance
         .collection('Usuarios_data')
         .doc(globals.UserUid)
-        .collection("pessoas");
-    ;
+        .collection('tabela_notas');
   }
 
-  Widget pessoas_lista(item) {
+  Widget nota_lista(item) {
     String Titulo = item.data()['nome'];
-    String Lembrete = item.data()['idade'];
+    String Lembrete = item.data()['lembrete'];
 
     return ListTile(
       leading: Icon(
-        Icons.person,
+        Icons.note,
         color: Theme.of(context).secondaryHeaderColor,
         size: 45,
       ),
@@ -67,7 +65,7 @@ class _Pessoas_ScreenState extends State<Pessoas_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pessoas')),
+      appBar: AppBar(title: Text('Notas')),
       body: Container(
           decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
           child: StreamBuilder<QuerySnapshot>(
@@ -84,7 +82,7 @@ class _Pessoas_ScreenState extends State<Pessoas_Screen> {
                   return ListView.builder(
                     itemCount: dados.size,
                     itemBuilder: (context, index) {
-                      return pessoas_lista(dados.docs[index]);
+                      return nota_lista(dados.docs[index]);
                     },
                   );
               }
@@ -96,7 +94,7 @@ class _Pessoas_ScreenState extends State<Pessoas_Screen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => Pessoas_add_Screen()));
+                  builder: (BuildContext context) => Notas_Add()));
         },
         child: const Icon(Icons.note_add),
         backgroundColor: Theme.of(context).primaryColor,

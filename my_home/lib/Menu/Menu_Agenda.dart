@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:my_home/Funcoes/agenda.dart';
 
 class Menu_Agenda extends StatefulWidget {
   const Menu_Agenda({Key? key}) : super(key: key);
@@ -35,10 +36,15 @@ class _Menu_AgendaState extends State<Menu_Agenda> {
             child: Container(
                 child: ElevatedButton(
                     onPressed: () {
-                      _exibir();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  Agenda_Screen()));
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey, //Theme.of(context).primaryColor,
+                      primary: Theme.of(context)
+                          .primaryColor, //Theme.of(context).primaryColor,
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(10.0),
                       ),

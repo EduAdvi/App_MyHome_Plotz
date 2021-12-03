@@ -27,6 +27,26 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyAl_WOUaRooP3dzvZEiF6fjji3d8bRJ7iA",
+      authDomain: "myhome-854c6.firebaseapp.com",
+      databaseURL: "https://myhome-854c6.firebaseio.com",
+      projectId: "myhome-854c6",
+      storageBucket: "myhome-854c6.appspot.com",
+      //messagingSenderId: "...",
+      appId: "402553237561-m95rkhsm9js7m0ajb1jp9928b8kmfr52.apps.googleusercontent.com",
+     // measurementId: "G-...",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -94,5 +114,7 @@
       loadMainDartJs();
     }
   </script>
+
 </body>
 </html>
+

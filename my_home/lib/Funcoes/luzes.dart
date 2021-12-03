@@ -1,10 +1,13 @@
 import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:my_home/Funcoes/pessoas_widget.dart';
 import 'package:my_home/main.dart';
 import 'package:my_home/Funcoes/luzes_widget.dart';
+
+import 'package:my_home/globals.dart' as globals;
 
 class Luzes_Screen extends StatefulWidget {
   const Luzes_Screen({Key? key}) : super(key: key);
@@ -28,10 +31,10 @@ class _Luzes_ScreenState extends State<Luzes_Screen> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          Luz_botao('Sala'),
-                          Luz_botao('Quarto'),
-                          Luz_botao('Banheiro'),
-                          Luz_botao('Cozinha'),
+                          Luz_botao('Sala', 'luz_1'),
+                          Luz_botao('Quarto', 'luz_2'),
+                          Luz_botao('Banheiro', 'luz_3'),
+                          Luz_botao('Cozinha', 'luz_4'),
                         ],
                       ))
                 ],
@@ -61,6 +64,7 @@ Widget Botao_luz(bool estado) {
                       } else {
                         estado = true;
                       }
+                      // FirebaseFirestore.instance.collection('Usuarios_data').doc(globals.UserUid).collection('Trancas_State')
                       Botao_luz(estado);
                       print(estado);
                     },
